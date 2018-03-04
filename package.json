@@ -1,0 +1,19 @@
+{
+  "name": "ca-ui-kit-component-cli",
+  "version": "1.0.0",
+  "description": "A CLI which can be used to generate the scaffolding for a component in a javascript UI library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ca",
+    "ui",
+    "cli"
+  ],
+  "author": "John Gorman (jack.m.gman@gmail.com)",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.14.1"
+  }
+}
