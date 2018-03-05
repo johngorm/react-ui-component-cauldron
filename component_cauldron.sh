@@ -4,32 +4,41 @@ core_styles_dir="lib/styles"
 core_scss="core.scss"
 core_js="lib/core.js"
 
+echo "Running React Component Cauldron..."
 if [[ -z "$1" ]]; then
   echo "No component name provided" >&2
 	exit 1
 fi
+
 echo "Creating UI component $1" >&2
-echo "Attemping to find component dir..." >&2
+
 if [[ -r ./.uirc ]]; then
 	echo ".uirc file found..." >&2
 	. ./.uirc
 fi
+
 componentName="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"	
 dest="$(pwd)/$component_dir$componentName"
 
 if [[ ! -d $(pwd)/$core_styles_dir ]]; then
   mkdir -p $(pwd)/$core_styles_dir
 fi
+
 coreSass=$(pwd)/$core_styles_dir$core_scss
 `touch $coreSass`
 echo "import \"../components/$componentName/$componentName.scss\";" >> $coreSass
-`touch $(pwd)/core_js`
 
-echo "Scaffolding out component $1 in dir $dest"
-mkdir -p $dest
-cd $dest
-if [[ -e ./$componentName.js || -e ./$name.scss ]]; then
-	echo "Files for $componentName component already exists; Exiting program"
+if [[ ! -f $(pwd)core_js ]]; then
+  `touch $(pwd)/core_js`
+	echo "import './styles/$core_scss';
+export * from './components';" > $(pwd)/core_js
+fi
+
+echo "Beginning scaffolding component $1 in dir $dest" >&2
+mkdir -p $dest && cd $dest
+
+if [[ -f ./$componentName.js || -f ./$componentName.scss ]]; then
+	echo "Files for $componentName component already exists; Exiting program" >&2
 	exit 1
 fi
 
@@ -37,17 +46,21 @@ fi
 $(touch $componentName.scss)
 $(touch $componentName.js)
 
-echo "Templating JS file..."
-echo -e "import React, { PureComponent } from 'react';
+echo "Templating JS file..." >&2
+echo "import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class $componentName extends PureComponent {
-  constructor() {
-    super();
+export default class $componentName extends Component {
+  constructor(props) {
+    super(props);
   }
 
   render() {
+    return (
+      <div>
 
+      </div>
+    );
   }
 }
 
@@ -60,5 +73,7 @@ $componentName.propTypes = {
 
 cd ..
 `touch index.js`
+echo "Exporting component through index.js..." >&2
 echo "export { default as $componentName } from './$componentName/$componentName';" >> index.js
+echo "Done! React component created!" >&2
 exit 0
