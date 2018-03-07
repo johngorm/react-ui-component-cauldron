@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-component_dir="lib/components"
-core_styles_dir="lib/styles"
+component_dir="lib/components/"
+core_styles_dir="lib/styles/"
 core_scss="core.scss"
 core_js="lib/core.js"
 
@@ -18,20 +18,20 @@ if [[ -r ./.uirc ]]; then
 fi
 
 componentName="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"	
-dest="$(pwd)/$component_dir$componentName"
+dest="$(pwd)/$component_dir/$componentName"
 
 if [[ ! -d $(pwd)/$core_styles_dir ]]; then
   mkdir -p $(pwd)/$core_styles_dir
 fi
 
-coreSass=$(pwd)/$core_styles_dir$core_scss
+coreSass=$(pwd)/$core_styles_dir/$core_scss
 `touch $coreSass`
-echo "import \"../components/$componentName/$componentName.scss\";" >> $coreSass
+echo "@import \"../components/$componentName/$componentName.scss\";" >> $coreSass
 
-if [[ ! -f $(pwd)core_js ]]; then
+if [[ ! -f $(pwd)/$core_js ]]; then
   `touch $(pwd)/core_js`
 	echo "import './styles/$core_scss';
-export * from './components';" > $(pwd)/core_js
+export * from './components';" > $(pwd)/$core_js
 fi
 
 echo "Beginning scaffolding component $1 in dir $dest" >&2
