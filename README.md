@@ -2,10 +2,10 @@
 
 ## This is CLI that can be used to generate the base code for a react component that is part of a UI library. 
 
-Usage: Simply download the shell script and place it in the root directory of your library project, then call the script: 
+Usage: Simply download and add the directory to your PATH variable, then call the script in root directory of your UI Library project like so...
 
 ```shell
-./component_cauldron ComponentName
+component_cauldron ComponentName
 ```
 Arguments:
 * ComponentName : Required string with no whitespaces
@@ -13,7 +13,6 @@ Arguments:
 Once run under default settings, your project directory will look like this: 
 
 .
-* component_cauldron.sh
 * lib/
   * ComponentName/
     * ComponentName.js
