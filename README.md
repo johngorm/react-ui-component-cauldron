@@ -14,11 +14,12 @@ Once run under default settings, your project directory will look like this:
 
 .
 * lib/
+ * components/
   * ComponentName/
     * ComponentName.js
     * ComponentName.scss
     * index.js
-  * styles/
+ * styles/
     * core.scss
 * index.js
 
