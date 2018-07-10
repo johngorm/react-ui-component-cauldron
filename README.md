@@ -14,14 +14,14 @@ Once run under default settings, your project directory will look like this:
 
 .
 * lib/
- * components/
-  * ComponentName/
-    * ComponentName.js
-    * ComponentName.scss
-    * index.js
- * styles/
+  * components/
+    * ComponentName/
+      * ComponentName.js
+      * ComponentName.scss
+      * index.js
+  * styles/
     * core.scss
-* index.js
+  * core.js
 
 
 If you want to change the save structure, create a `.uirc` file in the root project directory and define them there
